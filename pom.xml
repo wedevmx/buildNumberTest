@@ -14,6 +14,12 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
 
+  <scm>
+    <url>scm:git:file:///home/diego/codes/wedev/buildNumberTest/.git</url>
+    <connection>scm:git:file:///home/diego/codes/wedev/buildNumberTest/.git</connection>
+    <developerConnection>scm:git:file:///home/diego/codes/wedev/buildNumberTest/.git</developerConnection>
+  </scm>
+
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -33,8 +39,30 @@
           <archive>
             <manifest>
               <mainClass>mx.com.wedev.App</mainClass>
+              <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
             </manifest>
+            <manifestEntries>
+              <Implementation-Build>${buildNumber}</Implementation-Build>
+            </manifestEntries>
           </archive>
+        </configuration>
+      </plugin>
+
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>buildnumber-maven-plugin</artifactId>
+        <version>1.4</version>
+        <executions>
+          <execution>
+            <phase>validate</phase>
+            <goals>
+              <goal>create</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <doCheck>true</doCheck>
+          <doUpdate>false</doUpdate>
         </configuration>
       </plugin>
     </plugins>
